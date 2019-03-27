@@ -19,8 +19,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  google_maps_flutter: ^0.4.0
+  geocoder: ^0.1.2
+  flutter_map: any # or the latest version on Pub
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -35,7 +35,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  assets:
+    - dive-flag-small.gif
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

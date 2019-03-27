@@ -1,5 +1,4 @@
 import 'package:divelog/widgets/home_state.dart';
-import 'package:divelog/widgets/log_dive_state.dart';
 import 'package:divelog/widgets/mail_state.dart';
 import 'package:divelog/widgets/profile_state.dart';
 import 'package:divelog/widgets/easing_animation.dart';

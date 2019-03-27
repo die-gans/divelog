@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'home_state.dart';
 
 class EasingAnimationWidget extends StatefulWidget {
   @override
@@ -17,7 +18,6 @@ class EasingAnimationWidgetState extends State<EasingAnimationWidget>
     final double height = screenDimens.height;
     final double width = screenDimens.width;
     _controller.forward();
-
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Hero(
@@ -31,18 +31,28 @@ class EasingAnimationWidgetState extends State<EasingAnimationWidget>
                     transform: Matrix4.translationValues(
                         0.0, -_animation.value * height + (height * 0.05), 0.0),
                     child: new Center(
-                        child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10.0),
-                              topRight: Radius.circular(10.0))),
-                      width: width * 0.9,
-                      height: height * 0.9,
-                      child: Container(
-                          padding: EdgeInsets.all(20),
-                          child: Column(children: getFormItems())),
-                    )),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10.0),
+                                topLeft: Radius.circular(10.0)),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10.0),
+                                        topRight: Radius.circular(10.0))),
+                                width: width * 0.9,
+                                height: height * 0.9,
+                                child: Column(children: <Widget>[
+                                  Container(
+                                    width: width * 0.9,
+                                    height: height * 0.3,
+                                    child: HomeState(Colors.blue),
+                                  ),
+                                  Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 10),
+                                      child: Column(children: getFormItems())),
+                                ])))),
                   ));
             }),
       ),
@@ -123,41 +133,28 @@ class EasingAnimationWidgetState extends State<EasingAnimationWidget>
     return <Widget>[
       Row(
         children: <Widget>[
-          Expanded(
-              child: TextField(
-            onChanged: (text) => {},
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                hintText: 'Dive Buddy'),
-            autofocus: false,
-          )),
-          Expanded(
-              child: TextField(
-            onChanged: (text) => {},
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                hintText: 'Dive location'),
-            autofocus: false,
-          ))
+          Expanded(child: _genericTextField("Date")),
+          Expanded(child: _genericTextField("Dive buddy"))
         ],
       ),
-      TextField(
-        onChanged: (text) => {},
-        decoration: InputDecoration(
-            filled: true, fillColor: Colors.grey[300], hintText: 'Dive Buddy'),
-        autofocus: false,
-      ),
-      TextField(
-        onChanged: (text) => {},
-        decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.grey[300],
-            hintText: 'Dive location'),
-        autofocus: false,
-      )
+      _genericTextField("Date"),
+      _genericTextField("Dive location"),
+      _genericTextField("Max depth"),
+      _genericTextField("Average depth"),
+      _genericTextField("Temperature"),
+      _genericTextField("visibility"),
     ];
+  }
+
+  Widget _genericTextField(String text, ) {
+    return Container(
+        padding: EdgeInsets.symmetric(vertical: 2.5),
+        child: TextField(
+          onChanged: (text) => {},
+          decoration: InputDecoration(
+              filled: true, fillColor: Colors.white, hintText: text),
+          autofocus: false,
+        ));
   }
 
   @override
